@@ -31,6 +31,7 @@ namespace ProjProd
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<AppDBContext>(x => x.UseSqlServer("Server=DESKTOP-CTKTDI9\\RUDNEV;Database=Products_Base; Persist Security Info = false; Trusted_Connection=True;MultipleActiveResultSets=true"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
