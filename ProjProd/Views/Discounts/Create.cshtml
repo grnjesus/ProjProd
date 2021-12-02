@@ -1,0 +1,35 @@
+﻿@model ProjProd.Models.Discounts
+@{
+    ViewData["Title"] = "Создать купон";
+
+}
+
+
+<h4>Создать купон</h4>
+
+<form asp-action="Create" asp-controller="Discounts">
+    <div style=" width:330px">
+        <p>
+            Значение скидки <br />
+            @Html.EditorFor(model => model.Value_discount)
+        </p>
+        <p>
+            Тип скидки <br />
+            @Html.DropDownListFor(model => model.type_id, ViewBag.Type_Discounts as SelectList, new { @class = "form-control" })
+        </p>
+        <p>
+            Количество купонов <br />
+            @Html.EditorFor(model => model.Quantity)
+        </p>
+        <p>
+            Сколько дней купон будет действителен? <br />
+            @Html.EditorFor(model => model.End_date)
+        </p>
+        <p>
+            Примечание <br />
+            @Html.EditorFor(model => model.Note)
+        </p>
+        <br />
+    </div>
+    <button asp-action="AddDiscount" id="btnClick" class="btn btn-outline-success my-2 my-sm-0" type="submit">Сохранить</button>
+</form>

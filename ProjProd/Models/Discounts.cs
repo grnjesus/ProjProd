@@ -13,15 +13,13 @@ namespace ProjProd.Models
         public int id_discount { get; set; }
 
         [Required]
-        [Display(Name = "Наименование скидки")]
+        [Display(Name = "Купон")]
         public string Name_discount { get; set; }
 
         [Required]
         [Display(Name = "Значение")]
         public string Value_discount { get; set; }
 
-        [Association("fktype_id", "Discounts.type_id", "Type_Discount.id_type")]
-        public int type_id { get; set; }
 
         [Required]
         [Display(Name = "Количество купонов")]
@@ -34,5 +32,10 @@ namespace ProjProd.Models
         [Required]
         [Display(Name = "Примечание")]
         public string Note { get; set; }
+
+
+        [Association("fktype_id", "Discounts.type_id", "Type_Discount.id_type")]
+        public int type_id { get; set; }
+        public Type_Discount Type_Discount { get; set; }
     }
 }

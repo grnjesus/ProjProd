@@ -1,0 +1,14 @@
+﻿@model ProjProd.Models.Discounts
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h4>Ваш купон</h4>
+    </div>
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>Название модели:</dt>
+            <dd>@Html.DisplayFor(model => model.Name_discount)</dd>
+        </dl>
+    </div>
+</div>

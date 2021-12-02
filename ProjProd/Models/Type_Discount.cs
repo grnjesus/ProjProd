@@ -15,5 +15,7 @@ namespace ProjProd.Models
         [Required]
         [Display(Name = "Тип скидки")]
         public string Name_type { get; set; }
+
+        public IEnumerable<Discounts> Discounts { get; set; }
     }
 }
