@@ -10,7 +10,7 @@ namespace ProjProd.Models
     {
         [Required]
         [Key]
-        public int id_product { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [Display(Name = "Наименование продукта")]
@@ -18,9 +18,12 @@ namespace ProjProd.Models
 
         [Required]
         [Display(Name = "Цена")]
-        public float Price { get; set; }
+        public Double Price { get; set; }
 
-        [Association("fkphoto_id", "Products.photo_id", "Photos_Prod.id_photo")]
-        public int photo_id { get; set; }
+        [Association("fkphoto_id", "Products.Photos_ProdID", "Photos_Prod.ID")]
+        public int? Photos_ProdID { get; set; }
+
+        public Photos_Prod Photos_Prod { get; set; }
+
     }
 }

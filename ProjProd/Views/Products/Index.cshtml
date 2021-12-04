@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ProjProd.Models.Products>
+
+@{ 
+
+}
+<h4>Товары:</h4>
+
+<form asp-action="Index" asp-controller="Products">
+    <div class="list-group">
+
+        <table class="table">
+            @for (var column = 0; column < ((Model.Count() +1) / 3); column ++)
+            {
+                @*<div href="#" class="list-group-item">
+
+                <h5 class="list-group-item-heading">@entity.date_comm @entity.login_user:</h5>
+                <p class="list-group-item-text">@entity.comment</p>
+                @if (@entity.login_user == Program.UserName; column < 3; colimn ++)
+                {
+                    <a class="btn btn-outline-success my-2 my-sm-0" asp-action="Update" asp-route-id="@entity.id_comment">Изменить</a>
+                    <button type="submit" class="btn btn-outline-success my-2 my-sm-0" asp-action="Delete" asp-route-id="@entity.id_comment">Удалить</button>
+                }
+            </div>*@
+                <td>
+                    @foreach (var row in Model)
+                    {
+                        @if (row.Photos_ProdID != null)
+                        {
+
+                        }
+                        <tr>@Html.DisplayFor(modelItem => row.Name_prod) </tr>
+
+                        <tr>@Html.DisplayFor(modelItem => row.Price) </tr>
+
+
+
+                    }
+                    </td>
+
+                }
+        </table>
+    </div>
+</form>

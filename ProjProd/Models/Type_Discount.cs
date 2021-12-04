@@ -10,7 +10,7 @@ namespace ProjProd.Models
     {
         [Required]
         [Key]
-        public int id_type { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [Display(Name = "Тип скидки")]

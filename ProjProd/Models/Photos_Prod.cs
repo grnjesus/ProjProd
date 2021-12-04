@@ -11,7 +11,7 @@ namespace ProjProd.Models
     {
         [Required]
         [Key]
-        public int id_photo { get; set; }
+        public int ID { get; set; }
 
         //[Required]
         //[Display(Name = "Фото")]
@@ -20,5 +20,7 @@ namespace ProjProd.Models
         [Required]
         [Display(Name = "Подсказка")]
         public string AltText { get; set; }
+
+        public IEnumerable<Products> Products { get; set; }
     }
 }

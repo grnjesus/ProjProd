@@ -1,40 +1,4 @@
-﻿@*@model ProjProd.Models.Discounts
-    @{
-        ViewData["Title"] = "Создать купон";
-
-    }
-
-
-    <h4>Создать купон</h4>
-
-    <form asp-action="Index" asp-controller="Discounts">
-        <div style=" width:330px">
-            <p>
-                Значение скидки <br />
-                @Html.EditorFor(model => model.Value_discount)
-            </p>
-            <p>
-                Тип скидки <br />
-                @Html.DropDownListFor(model => model.type_id, ViewBag.Type_Discounts as SelectList, new { @class = "form-control" })
-            </p>
-            <p>
-                Количество купонов <br />
-                @Html.EditorFor(model => model.Quantity)
-            </p>
-            <p>
-                Сколько дней купон будет действителен? <br />
-                @Html.EditorFor(model => model.End_date)
-            </p>
-            <p>
-                Примечание <br />
-                @Html.EditorFor(model => model.Note)
-            </p>
-            <br />
-        </div>
-        <button asp-action="AddDiscount" id="btnClick" class="btn btn-outline-success my-2 my-sm-0" type="submit">Сохранить</button>
-    </form>*@
-
-@model IEnumerable<ProjProd.Models.Discounts>
+﻿@model IEnumerable<ProjProd.Models.Discounts>
 @{
     ViewBag.Title = "Все купоны";
 }
@@ -43,7 +7,7 @@
 <p>
     @Html.ActionLink("Добавить купон", "Create")
 </p>
-<table>
+<table class="table">
     <tr>
         <th>Купон</th>
         <th>Значение</th>
@@ -64,7 +28,7 @@
         @Html.DisplayFor(modelItem => item.Value_discount)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Type_Discount.Name_type)
+        @Html.DisplayFor(modelItem => item.Type_DiscountID)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.Quantity)
@@ -76,8 +40,8 @@
         @Html.DisplayFor(modelItem => item.Note)
     </td>
     <td>
-        @Html.ActionLink("Редактировать", "Edit", new { id = item.id_discount }) |
-        @Html.ActionLink("Удалить", "Delete", new { id = item.id_discount })
+        @Html.ActionLink("Редактировать", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Удалить", "Delete", new { id = item.ID })
     </td>
 </tr>
     }

@@ -10,7 +10,7 @@ namespace ProjProd.Models
     {
         [Required]
         [Key]
-        public int id_discount { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [Display(Name = "Купон")]
@@ -18,14 +18,16 @@ namespace ProjProd.Models
 
         [Required]
         [Display(Name = "Значение")]
-        public string Value_discount { get; set; }
+        public Double Value_discount { get; set; }
 
 
         [Required]
+        [Range(1, 999)]
         [Display(Name = "Количество купонов")]
-        public float Quantity { get; set; }
+        public int Quantity { get; set; }
 
         [Required]
+        [Range(1, 999)]
         [Display(Name = "Дата окончания")]
         public string End_date { get; set; }
 
@@ -34,8 +36,8 @@ namespace ProjProd.Models
         public string Note { get; set; }
 
 
-        [Association("fktype_id", "Discounts.type_id", "Type_Discount.id_type")]
-        public int type_id { get; set; }
+        [Association("fktype_id", "Discounts.Type_Discountid", "Type_Discount.ID")]
+        public int? Type_DiscountID { get; set; }
         public Type_Discount Type_Discount { get; set; }
     }
 }

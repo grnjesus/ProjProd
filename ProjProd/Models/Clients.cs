@@ -10,7 +10,7 @@ namespace ProjProd.Models
     {
         [Required]
         [Key]
-        public int id_client { get; set; }
+        public int ID { get; set; }
         [Required]
         [Display(Name = "Имя клиента")]
         public string Name_cl { get; set; }

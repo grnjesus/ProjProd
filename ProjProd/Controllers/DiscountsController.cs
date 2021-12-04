@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -21,13 +22,13 @@ namespace ProjProd.Controllers
 
         public IActionResult Index()
         {
-            //var discounts = db.discounts.Include(p => p.Type_Discount).Where("Type_Disccountid_type == Type_discount.id_type");
-            //return View(discounts.ToList());
+            var discounts = db.discounts.Include(p => p.Type_Discount);
+            return View(discounts.ToList());
         }
 
         public async Task<IActionResult> Create()
         {
-            SelectList types = new SelectList(db.type_Discount, "id_type", "Name_type");
+            SelectList types = new SelectList(db.type_Discount, "ID", "Name_type");
             ViewBag.Type_Discounts = types;
             return View();
         }
@@ -47,11 +48,51 @@ namespace ProjProd.Controllers
             for (int i = 0; i<5 ; i++)
                 name_disc += pwdChars[rnd.Next(0, 25)];
             discount.Name_discount = name_disc;
+            if (discount.Quantity <= 0) discount.Quantity = 999;
             discount.End_date = DateTime.Now.AddDays(Convert.ToInt32(discount.End_date)).ToString("dd.MM.yyyy");
             //Добавляем игрока в таблицу
             db.discounts.Add(discount);
             db.SaveChanges();
             // перенаправляем на главную страницу
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }); 
+            }
+            // Находим в бд футболиста
+            Discounts discount = db.discounts.Find(id);
+            if (discount != null)
+            {
+                // Создаем список команд для передачи в представление
+                SelectList types = new SelectList(db.type_Discount, "ID", "Name_type", discount.Type_DiscountID);
+                ViewBag.Type_Discount = types;
+                discount.End_date = ((Convert.ToDateTime(discount.End_date) - DateTime.Now).Days + 1).ToString();
+
+                return View(discount);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Discounts discount)
+        {
+            discount.End_date = DateTime.Now.AddDays(Convert.ToInt32(discount.End_date)).ToString("dd.MM.yyyy");
+            db.Entry(discount).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            Discounts discount = new Discounts { ID = id };
+            db.Entry(discount).State = EntityState.Deleted;
+            db.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }
